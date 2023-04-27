@@ -1,0 +1,38 @@
+if you download this from github, run npm install to re-download the node_modules folder with important dependencies.
+
+Parts:
+App
+
+----
+To run front-end reactjs:
+    npm run start
+
+To run back-end nodejs
+    make sure you are in client
+    nodemon server 
+
+Tutorials watched:
+
+For creating click events:
+    https://www.youtube.com/watch?v=0XSDAup85SA&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=7&ab_channel=TheNetNinja
+For adding components (html sections) from other files:
+    https://www.youtube.com/watch?v=0sSYmRImgRY&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=6&ab_channel=TheNetNinja
+For adding JS values into HTMl files
+    https://www.youtube.com/watch?v=pnhO8UaCgxg&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=5&ab_channel=TheNetNinja
+Dynamic variables (states)
+    https://www.youtube.com/watch?v=4pO-HcG2igk&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=8&ab_channel=TheNetNinja
+Dynamic variables passing into other child components
+    https://www.youtube.com/watch?v=PHaECbrKgs0&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=11&ab_channel=TheNetNinja
+
+----
+Make sure that any dependencies meant for the backend are correspondingly installed in the folder.
+
+
+----
+old commands:
+    poolSize
+    wtimeout
+    useNewUrlParse
+are deprecated as were used in index.js, and were replaced by the methods used in the file, respectively.
+----
+To access the "entries" database in haia, make sure to go to entriesDAO and change collections to from "test" to "entries", and to change to the MAIN mongodb link in the env file (or replace /test with /haia)
