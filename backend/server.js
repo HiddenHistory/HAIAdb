@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//The server will use the entries route from the file "entries"
+//The server will use the routes provided from from the file "entries" with the url "api/v1/entries/..."
 app.use("/api/v1/entries", entries);
 //Attempt to access non-existent routes.
 app.use("*", (req, res) => res.status(404).json({error: "page not found"}));

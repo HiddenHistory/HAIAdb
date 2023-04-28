@@ -1,4 +1,5 @@
-//Class to control interaction with the entries, search results
+//Class to control directAccessObject requests to the mongodb Database through entriesDAO; meant for queries and parses
+//Consider renaming to entriesInteraction or entriesQuery or entriesParser or entriesSearcher or something else of the sort.
 //Imports
 import entriesDAO from '../dao/entriesDAO.js';
 
@@ -10,7 +11,6 @@ export default class entriesController{
     //  Search method taking a req as an input, which represents the contents of a search URL. query.X is the field contained within the url.
     //We can reduce total number of requests to the mongoDB server by requesting all results at once to the client, and then parsing them out as according to page number on the client end.
     static async apiGetResults(req, res, next){
-
         //Define the three fields - filters, page, entriesPerPage, which will be passed to the search handler in entriesDAO
         //The input request will contain a query with an amount of search results to display per page. Default given as 20.
         //Might want to consider renaming to "resultsPerPage"? if this is a search function only.
@@ -54,6 +54,7 @@ export default class entriesController{
         //Send a json file containing our given response fields as the response from the method.
         res.json(response);
         }
+        
 
         static async getContents(req, res){
             return await entriesController.getResults

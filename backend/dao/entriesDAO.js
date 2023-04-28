@@ -8,6 +8,7 @@ let entries;
 
 //This class & its methods will handle the actual connections to the database.
 export default class entriesDAO {
+    //Connect to the database
     static async injectDB(conn){
         if (entries){
             return;

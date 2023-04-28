@@ -3,6 +3,18 @@ if you download this from github, run npm install to re-download the node_module
 Parts:
 App
 
+Connection to MONGODB, SINGIN:
+    index.js
+        connects to the mongoDB server under an account given in the connect() method, and then "injects" the mongoDB class into the given DAO files (entriesDAO, modDAO) so that they can use mongoDB methods.
+Routes & Server
+    entriesroute.js file: 
+        handles requests to the backend mongodb database using commands in the entriescontroller && entriesmod class. If you wish to add new interactions to the mongodb database, add a new route command in entriesroutes and a new corresponding command in the entriescontroller / entriesmod.
+    entriescontroller.js && entriesmod.js 
+        process data given for interactions with the mongodb server and then communicates with mongodb-compatible entriesDAO file, which makes requests to the database with the correspondingly prepared data. The results are contained in res.json and returned.
+    entriesDAO.js & modDAO.js 
+        handle the direct interaction with the mongodb database using arguments provided by the entriescontroller / entriesmod file, and then returns the results of those interaction requests as an array or json file.
+
+Ensure that all potentially connecting controllers & routes have their respective DAOS correctly INJECTED!
 ----
 To run front-end reactjs:
     npm run start
@@ -35,4 +47,25 @@ old commands:
     useNewUrlParse
 are deprecated as were used in index.js, and were replaced by the methods used in the file, respectively.
 ----
-To access the "entries" database in haia, make sure to go to entriesDAO and change collections to from "test" to "entries", and to change to the MAIN mongodb link in the env file (or replace /test with /haia)
+
+
+
+
+----
+SETUP WITH REAL ENTRIES:
+To access the "entries" database in haia, make sure to go to entriesDAO AND entriesmodDAO files & change collections to from "test" to "entries", and to change to the MAIN mongodb in the env file (or replace /test with /haia), along with te MAIN entries_ns file
+CREATE A NEW INDEX WITH MONGODB FOR THE REAL ENTRIES. SEE: https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org @ 44:10!
+
+---
+ADD ALL PROPER ENTRIES TO DAO AND CONTROLLER/MOD CLASSES!
+
+----
+Later reference:
+If you intend on adding a user system to the database, and want to have user-updates or other interactions verifying an interaction, consider watching https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org at 48:06
+FINAL DATABASE SETUP:
+Chance DB access to ONLY read, on MongoDB
+
+----
+Read/write pass:
+bigman45
+nIbN912819102qw9sEwsD
