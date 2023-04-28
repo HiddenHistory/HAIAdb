@@ -2,7 +2,7 @@
 //**If entrylist does NOT import, check to make sure you have not MOVED it to dev. */
 //Imports
 import { useState, useEffect } from 'react';
-import Entrylist from './entrylist';
+import Entrylist from './dev/entrylist';
 
 const Home = () => {
     const[entries, queryResults] = useState([

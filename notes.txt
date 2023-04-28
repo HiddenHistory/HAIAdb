@@ -1,11 +1,15 @@
 if you download this from github, run npm install to re-download the node_modules folder with important dependencies.
 
 Parts:
-App
+MAIN APP:
+    index.js
 
 Connection to MONGODB, SINGIN:
+Server & Mongo
+    server.js:
+        internal server setup & organization for hosting the website.
     index.js
-        connects to the mongoDB server under an account given in the connect() method, and then "injects" the mongoDB class into the given DAO files (entriesDAO, modDAO) so that they can use mongoDB methods.
+        connects to the mongoDB server under an account given in the connect() method, and then "injects" the mongoDB class into the given DAO files (entriesDAO, modDAO) so that they can use mongoDB methods.    
 Routes & Server
     entriesroute.js file: 
         handles requests to the backend mongodb database using commands in the entriescontroller && entriesmod class. If you wish to add new interactions to the mongodb database, add a new route command in entriesroutes and a new corresponding command in the entriescontroller / entriesmod.
@@ -15,6 +19,17 @@ Routes & Server
         handle the direct interaction with the mongodb database using arguments provided by the entriescontroller / entriesmod file, and then returns the results of those interaction requests as an array or json file.
 
 Ensure that all potentially connecting controllers & routes have their respective DAOS correctly INJECTED!
+----
+HTML/REACT/CSS
+App:
+    index.js
+        main "application" control. Injects an app into HTML elements with the "root" ID & controls page-rendering. "Control-center".
+    App.js 
+        main application file for the homepage, controls its layout.
+Components:
+    navbarcomponent.js 
+        used as a template for the navbar, which is shared between most pages. Links mostly to ROUTES established within the react application.
+
 ----
 To run front-end reactjs:
     npm run start
