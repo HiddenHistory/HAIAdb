@@ -42,9 +42,9 @@ export default class entriesDAO {
         //If our filter is "text", this means we are executing a general search and are looking for a word match in any field.
         if(filters.text){
             query={
-                $or:[{title:text}, {src:text}, {keywords:text}]
+                $or:[{title:{"$regex":filters.text}}, {src:{"$regex":filters.text}}, {keywords:filters.text}]
             }
-        } // modify this full query: $or:[{title:text}, {subtitle:text}, {src:text}, {description:text}, {context:text}, {keywords:text}, {tags:text}, {authors:text}]
+        } // modify this full query: $or:[{title:filters.text}, {subtitle:filters.text}, {src:filters.text}, {description:filters.text}, {context:filters.text}, {keywords:filters.text}, {tags:filters.text}, {authors:filters.text}]
         //If our filter type is not "text", this means we are executing an advanced search with specific field checks
         else if (filters){
             if ("title" in filters){
@@ -101,9 +101,7 @@ export default class entriesDAO {
             }
         }
         //Limit amount of results per page to the entries per page input, and set each page to show the results following the previous page's (starting at showing the results from 0-limit for page 1)
-        if(entriesPerPage != 50){
-            const displayCursor = cursor.limit(entriesPerPage).skip(entriesPerPage * (page - 1))
-        }
+        const displayCursor = entriesPerPage == 50? cursor : displayCursor = cursor.limit(entriesPerPage).skip(entriesPerPage * (page - 1));
 
         try{
             const resultsList = await displayCursor.toArray();

@@ -102,7 +102,7 @@ const SearchResults = (props) => {
     if(mode){
         //If "by" is text, we should execute a regular search looking for matches in ALL fields.
         if(by[0] == "text"){
-          EntryDataService.get(query[0], by[0])
+          EntryDataService.find(query[0], by[0])
             .then(response => {
               console.log(response.data, "text-based all-search");
               setEntries(response.data.entries);
