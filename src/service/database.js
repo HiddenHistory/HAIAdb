@@ -17,13 +17,13 @@ class EntryDataService {
         return http.get(`/id/${id}`);
     }
     //Initiate a particular search and retrieve results which fit, paginated. Default look for title.
-    static findPaginated(query, by="title", page=1){
+    static findPaginated(query, by, page){
         //If "!by" (if by is null), implement a generalized search.
         //Else, take the ARRAY of parameters given to "by" and execute a search using ANY of them to generate a hit.
         return http.get(`?${by}=${query}&page=${page}`);
     }
     //Initiate a particular search and retrieve results which fit, paginated. Default look for title.
-    static find(query, by="title"){
+    static find(query, by){
         //If "!by" (if by is null), implement a generalized search.
         //Else, take the ARRAY of parameters given to "by" and execute a search using ANY of them to generate a hit.
         return http.get(`?${by}=${query}`);

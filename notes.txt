@@ -15,6 +15,9 @@ Dynamic variables (states)
 Dynamic variables passing into other child components
     https://www.youtube.com/watch?v=PHaECbrKgs0&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=11&ab_channel=TheNetNinja
 
+
+
+
 ----
 Parts>
 BACKEND:
@@ -73,11 +76,17 @@ are deprecated as were used in /backend/index.js, and were replaced by the metho
 
 ----
 Later Setup:
+!Single Keyword/Tags array based Advanced Search
+    http-common.js add functionality to handle arrays for a single-parameter find request. Currently, keywordstoArray passes in ALL keywords in an array which needs to be handled somewhere for a keywords-based search.
+
 !Replace placeholder data with proper entries
     Add Additional Information Requests in frontend:
-        /src/pages/searchResults.js add extra fields to searchResults function.
+        /src/pages/searchResults.js add extra fields to searchResults function. 
+                ---- method:queryBy- ADD additional potential fields being passed into PROPS. Treat TAGS the same as KEYWORDS by adding a second ARR of STRINGS.
+                ---- method:useEffect->if(mode). ADD an additional ELSE IF statement for IF the field is TAGS. The ELSEIF statement is needed because the given text QUERY for a general search might not be matched by the initial includes(query) call, which can ONLY compare for STRINGS. Hence, we need to SPECIFICALLY check for matches within our KEYWORDS and TAGS arrays!
         /src/pages/search.js add extra fields for search parameters that can be sent off to the search results page.
         /srs/pages/entryMod.js add extra fields to EntryMod function.
+        database.js add functionality to handle arrays for a multiple-parameter find request
 
         
 

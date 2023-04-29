@@ -14,7 +14,7 @@ export default class entriesController{
         //Define the three fields - filters, page, entriesPerPage, which will be passed to the search handler in entriesDAO
         //The input request will contain a query with an amount of search results to display per page. Default given as 20.
         //Might want to consider renaming to "resultsPerPage"? if this is a search function only.
-        const entriesPerPage = req.query.entriesPerPage ? parseInt(req.query.entriesPerPage) : 20;
+        const entriesPerPage = req.query.entriesPerPage ? parseInt(req.query.entriesPerPage) : 25;
         const page = req.query.page ? parseInt(req.query.page) : 1; //Page-number tracking.
 
         //Filters hopefully passed in through the url. If no filters were given, you should not allow the search; this should be handled in the frontend by simply not sending back a search query if the filters set is empty.

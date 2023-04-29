@@ -14,7 +14,7 @@ router.route('/modify')
     //add new entries to the database
     .post(entriesMod.apiPostEntry)
     //update an entry in the database. CHANGE TO A PATCH OPERATION LATER. ALSO UPDATE OPERATION IN ENTRIESMOD
-    .patch(entriesMod.apiUpdateEntry)
+    .put(entriesMod.apiUpdateEntry)
     //Delete request
     .delete(entriesMod.apiDeleteEntry)
 

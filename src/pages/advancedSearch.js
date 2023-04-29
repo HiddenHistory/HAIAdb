@@ -78,7 +78,7 @@ const AdvancedSearch = () => {
                     state={
                         {
                             title:searchTitle,
-                            source:searchSource,
+                            src:searchSource,
                             keywords:searchKeywords,
                             entriesPerPage:searchEntriesPerPage,
                             page:1,
