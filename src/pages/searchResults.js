@@ -16,25 +16,36 @@ import EntryDataService from '../service/database';
 const SearchResults = (props) => {
 
   //location will contain values passed in through the search pages.
-  const location = useLocation()
+  const location = useLocation();
+  const {type} = useParams();
+  const od = location.state;
+  
   console.log(location.state, -1)
+  console.log(od, +5)
 
+  
   const keywordsToArr = () => {
     let keywordArray = [];
     let currString = "";
-    for(let i = 0; i < location.state.keywords.length;i = i + 1){
-        if(location.state.keywords.charAt(i) != ','){
-            if(location.state.keywords.charAt(i) != ' '){
-                currString = currString + location.state.kewords.charAt(i);
+    for(let i = 0; i < od.keywords.length;i = i + 1){
+        if(od.keywords.charAt(i) != ','){
+            if(od.keywords.charAt(i) != ' '){
+                currString = currString + od.keywords.charAt(i);
             }
         }
         else{
             keywordArray.push(currString);
             currString = '';
         }
-        return keywordArray;
     }
+    if(currString !== ""){
+      keywordArray.push(currString);
+    }
+    return keywordArray;
   }
+
+  const o = keywordsToArr();
+  console.log(o);
 
   //Add fields to this when I switch from the dummy data to the proper data
   const [entries, setEntries] = useState([]);
