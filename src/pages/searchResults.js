@@ -84,7 +84,7 @@ const SearchResults = (props) => {
   
 
   /*RESULTS USESTATE PREPARATION*/
-
+ 
   //Variable decs for results.
   const [entries, setEntries] = useState([]);
   //Contains all displayed objects for the page.
@@ -96,104 +96,119 @@ const SearchResults = (props) => {
 
   //useEffect indicates that the component is not done acting even after it renders, as it will await updates from the interacitons with the database.
   useEffect(() => {
+    dataCall();
+  }, []);
+
+  async function dataCall () {
+
                                                                                                                             //[ignore]QUERY may also contain RESULTS, FOR AN ATTEMPT TO PAGINATE THEM.
     //PT 1: RETRIEVE ALL DATA FOR PAGE
     //If MODE, then we actually still need to SEARCH for entries FROM the database.
     if(mode){
-        //If "by" is text, we should execute a regular search looking for matches in ALL fields.
-        if(by[0] == "text"){
-          EntryDataService.find(query[0], by[0])
-            .then(response => {
-              console.log(response.data, "text-based all-search");
-              setEntries(response.data.entries);
-              mode = false;
-            })
-            .catch(error => {
-              console.log(error)
-            })
-        }
-        //We are NOT doing a text search, BUT there is only ONE thing we're searching by. For this situation, we will use a regular paginated request to the database with a known find.
-        else if (by.length == 1) {
-            //Call the "find" method of the database, using our query value and the search criterion
-          EntryDataService.findPaginated(query[0], by[0], page)
-            .then(response => {
-              console.log(response.data, "single-parameter search");
-              setEntries(response.data.entries);
-            })
-            .catch(error => {
-              console.log(error)
-            });
-        }
-        //Multiple "by" queries. Take these EXCLUSIVELY, so ALL requirements must be fulfilled for entry to be included.
-        else {
-          //Retrieve all entries fitting the first given criteria.
-          EntryDataService.find(query[0], by[0])
-            .then(response => {
-              console.log(response.data, "Multiple-parameters advanced search; not yet parsed for all matches.")
-              
-              //parse through data, determine what to put in final set of entries.
+      //If "by" is text, we should execute a regular search looking for matches in ALL fields.
+      if(by[0] == "text"){
+        EntryDataService.find(query[0], by[0])
+          .then(response => {
+            console.log(response.data, "text-based all-search");
+            mode = false;
+            dataRefresh(response.data.results);
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+      //We are NOT doing a text search, BUT there is only ONE thing we're searching by. For this situation, we will use a regular paginated request to the database with a known find.
+      else if (by.length == 1) {
+          //Call the "find" method of the database, using our query value and the search criterion
+        EntryDataService.findPaginated(query[0], by[0], page, entriesPerPage)
+          .then(response => {
+            console.log(response.data, "single-parameter search");
+            setEntries(response.data);
+            dataRefresh(response.data.results);
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
+      //Multiple "by" queries. Take these EXCLUSIVELY, so ALL requirements must be fulfilled for entry to be included.
+      else {
+        //Retrieve all entries fitting the first given criteria.
+        EntryDataService.find(query[0], by[0])
+          .then(response => {
+            console.log(response.data, "Multiple-parameters advanced search; not yet parsed for all matches.")
+            
+            //parse through data, determine what to put in final set of entries.
 
-              let matchingSet = []; 
-              //For each value in our returned dataset...
-              for(let i = 0; i < response.data.results.length; i = i + 1){
-                let matching = true;
-                //Check against each query. If one query does NOT match, its corresponding object isn't to be added. Move on to next one.
-                for(let j = 1; j < query.length && matching == true; j = j + 1){
-                  //Field with name contained in by[J] of search result "i" could be of types STRING or ARRAY. There are different procedures for each.
-                  //Case 1: by[J] is a String.
-                  if(typeof response.data.results[i][by[j]] == "string"){
-                    if(response.data.results[i][by[j]] == query[j].toLowerCase()){}
+            let matchingSet = []; 
+            //For each value in our returned dataset...
+            for(let i = 0; i < response.data.results.length; i = i + 1){
+              let matching = true;
+              //Check against each query. If one query does NOT match, its corresponding object isn't to be added. Move on to next one.
+              for(let j = 1; j < query.length && matching == true; j = j + 1){
+                //Field with name contained in by[J] of search result "i" could be of types STRING or ARRAY. There are different procedures for each.
+                //Case 1: by[J] is a String.
+                if(typeof response.data.results[i][by[j]] == "string"){
+                  if(response.data.results[i][by[j]] == query[j].toLowerCase()){}
+                  else{
+                    matching = false;
+                  }
+                }
+                //Case 2: by[J] is an Array.
+                else if(Array.isArray(response.data.results[i][by[j]])){
+                  //We have an array at the field with name contained in by[J], check if all query values exist in the data
+                  for(let k = 0; k < query[j].length && matching == true; k = k + 1){
+                    if(response.data.results[i][by[j]].includes(query[j][k].toLowerCase())){}
                     else{
                       matching = false;
                     }
                   }
-                  //Case 2: by[J] is an Array.
-                  else if(Array.isArray(response.data.results[i][by[j]])){
-                    //We have an array at the field with name contained in by[J], check if all query values exist in the data
-                    for(let k = 0; k < query[j].length && matching == true; k = k + 1){
-                      if(response.data.results[i][by[j]].includes(query[j][k].toLowerCase())){}
-                      else{
-                        matching = false;
-                      }
-                    }
-                  }
-                }
-                //If our data entry DID match, add it to our set of display results.
-                if(matching){
-                  matchingSet.push(response.data.results[i]);
                 }
               }
-              setEntries(matchingSet);
-              mode = false;
-            })
-            .catch(error => {
-              console.log(error)
-            })
+              //If our data entry DID match, add it to our set of total results.
+              if(matching){
+                matchingSet.push(response.data.results[i]);
+              }
+            }
+            setEntries(matchingSet);
+            console.log(matchingSet, "matchingSet")
+            mode = false;
+            dataRefresh(matchingSet)
+          })
+          .catch(error => {
+            console.log(error)
+          })   
         }
-      }
-    
-    //No need to parse the entire database, simply determine the set of entries for the page.
-    else{
-      setEntries(searchData.allMatched);
     }
+  
+  //No need to parse the entire database, simply determine the set of entries for the page.
+  else{
+    setEntries(searchData.allMatched);
+    dataRefresh(searchData.allMatched);
+  }
+  }
 
+  //Method to set the data for the page based on what was given.
+  function dataRefresh(arrayInput) {
+    console.log("dataRefresh", arrayInput)
     //PT 2: DETERMINE WHAT TO SHOW ON PAGE OUT OF ALL GIVEN RESULTS
     //Now we will detemermine pagination & what to display on-page.
+    
     let forpage = [];
     //If the amount of results (stored to entries in the first part of the method) is equal to or less than the amount of entries per page; we already know what to set our page values to be.
-    if(entries.length <= entriesPerPage){
-        forpage = entries;
+    if(arrayInput.length <= entriesPerPage){
+        forpage = arrayInput;
     }
     //If the amount of results is NOT equal to the amount of entries per page, we must determine what to show on the page out of a larger set.
     else{
       //Starting at the base for the page number, put things into the page
       for(let i = (page-1)*entriesPerPage; i < entriesPerPage; i++){
-        forpage.push(entries[i]);
+        forpage.push(arrayInput[i]);
       }
     }
     //These values will be displayed on the page.
     setForThisPage(forpage);
-  }, []);
+    console.log(forThisPage, "for this page")
+  }
 
   return (2
     //There should be a button somewhere that initiates a new search query using the same conditions as before but with the page value incremented, to display the next set of search results.

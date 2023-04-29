@@ -16,6 +16,9 @@ Dynamic variables passing into other child components
     https://www.youtube.com/watch?v=PHaECbrKgs0&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=11&ab_channel=TheNetNinja
 
 
+Other sites visited:
+For adding entryMod hit-enter event:
+    https://bobbyhadz.com/blog/react-detect-enter-key-press
 
 
 ----

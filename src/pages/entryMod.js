@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 //Import database class to access methods which allow for communications with database.
 import database from '../service/database';
 
-
-//MODLIST will use a GETALL method to retrieve EVERYTHING in the database.
-
 const EntryMod = props => {
   /*Notes on REACT function organization*/
     //Before reaching the return bloc in any app return section, we may declare any number of variables and work wiht them. REMEMBER THAT!
@@ -19,28 +16,44 @@ const EntryMod = props => {
     
     //Set of variables for all posisble searchterms
     
-    const [entries, setEntries] = useState([])
+    const [commands, setCommands] = useState([])
+    const [text, setText] = useState("");
 
     //useEffect communicates that the render of this component is not complete even after a page load, so that the page can continue to render
     useEffect(() => {
-      //In searching, retrieveEntries will only retrieve the the entries fitting the query. In entryMod, retrieveEntries will retrieve ALL entries.
-      retrieveEntries();
-    }, []);
-
-    //Method to retrieve the entries from the database, here all possible entries, which would fit the query.
-    const retrieveEntries = () => {
-      //Metod uses database class to retrieve all entries
-      database.getAll()
-        //Wait for a response from the database before continuing.
-        .then(response => {
-          //After retrieving the entries from the database with the getAll method which requests all entries through the backend using an axios middleman (whose link was given in the http-common.js file), we will add that response with the entries to an array, whose contents we can then display to update the total display for our results.
-          console.log(response.data);
-          setEntries(response.data.entries);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
+      
+    
+    const keyPress = key => {
+      console.log('Key pressed', key.key)
+      
+      if(key.key === 'Enter'){
+        key.preventDefault();
+        
+        function f() {
+        if(text.length > 5){
+        //check if a command was input instead.
+          if (text.substring(0, 7) == 'delete:'){
+            //deleteEntry(text);
+            console.log("deleteReq");
+          }
+          if (text.substring(0, 7) == 'update:'){
+            //updateEntry(text);
+            console.log("updateReq");
+          }
+          if (text.substring(0, 4) == 'post:'){
+            //postEntry(text);
+            console.log("postReq");
+          }
+        }
+        setCommands(commands => [text, ...commands])
+        setText('')
+        }
+        f();
+      }
+      
+    document.addEventListener("keydown", keyPress)
+    }
+    });
 
     //Add the delete process to this class to send off delete requests.
     const deleteEntry = die =>{
@@ -59,7 +72,15 @@ const EntryMod = props => {
   
     return (
       <div className="content">
-        Hi
+        This is the backend, the back of things.
+        <input  type="text"
+                className="barMod"
+                placeholder=""
+                value={text}
+                onChange={e => setText(e.target.value)}
+        />
+
+
       </div>
     );
   }
