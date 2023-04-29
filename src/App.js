@@ -2,10 +2,12 @@
 import React from "react";
 //Component imports
 import Navbar from './components/navbarcomponent';
+import SearchBar from './components/searchbar';
 //Page imports
 import Home from './home';
 import Entry from './pages/entry';
-import Search from './pages/search';
+import SearchResults from './pages/searchResults';
+import AdvSearch from './pages/advancedSearch';
 import EntryMod from './pages/entryMod';
 
 import { Routes, Route, Link} from "react-router-dom";
@@ -25,19 +27,26 @@ function App() {
     <div className="content">
       <Navbar />
       {
-        //This section controls movement between a series of routes, each of which corresponds to an html page which will control what displays in the webpage body.
+        //This section controls movement between a series of routes, each of which corresponds to an js docuemnt encoding for an html page body, which will control what displays in the client page.
       }
       <Routes>
         {
-          //Homepage route, given the paths (urls) "/" (default/empty) and "Home" (for obvious reasons). Uses the imported "home" component for rendering.
+          //If I am on the home page, display the contents of the Home class.
         }
         <Route path={'/'} element={<Home/>} />
         <Route path={'/Home'} element={<Home/>} />
 
+
         {
-          //entryMod route, given the path (url) "/entryMod". Uses the imported EntryMod component for rendering.
+          //If I am on advsearch, display the contents of the advsearch class.
         }
-        <Route path ={'/entryMod'} element={<EntryMod/>} />
+        <Route path={"/advsearch"} element={<AdvSearch/>} />
+        {
+          //If I am on searchResults, display the contents of the searchresults class. This takes in props given by the search components (either advancedsearch.js OR searchbar)
+        }
+        <Route path={'/search:find'} element={<SearchResults/>} />
+
+
 
         {
           /*entry route, given the path (url) "/entry" and a given id. Is not an EXACT path because we want the ":id" section to be malleable for different entries. Uses PROPS to specify entry in the query.
@@ -49,15 +58,13 @@ function App() {
               <Entry {...props} />
             )}
             />
+        
         {
-          //Search route for a specific search page. Add later.
+          //If I am on the entryMod page, display the contents of the entryMod class.
         }
-            {/*
-        <Route path={"/search"} element={<Search/> />
-            */}
-        {
-        //<Home />
-        }
+        <Route path ={'/entryMod'} element={<EntryMod/>} />
+
+
       </Routes>
     </div>
   );
@@ -65,3 +72,6 @@ function App() {
 
 //Return the app contents to the index.html file.
 export default App;
+
+
+  //Non-switch homepage //<Home />

@@ -13,6 +13,7 @@ const Navbar = () => {
                     borderRadius: '8px'
                 }}>make entries</a>
                 <a href="/about">About</a>
+                <a href="/advsearch">Advanced Search</a>
                 <a href="https://www.youtube.com/channel/UCaIHjtxqn6_ej_jNLUXMeiw">youtube</a>
             </div>
         </nav>

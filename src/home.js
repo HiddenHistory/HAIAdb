@@ -3,6 +3,7 @@
 //Imports
 import { useState, useEffect } from 'react';
 import Entrylist from './dev/entrylist';
+import SearchBar from './components/searchbar';
 
 const Home = () => {
     const[entries, queryResults] = useState([
@@ -18,6 +19,7 @@ const Home = () => {
 
     return ( 
         <div className="home">
+            <SearchBar/>
             <Entrylist entries={entries} handleDelete={handleDelete}/>
         </div>
      );

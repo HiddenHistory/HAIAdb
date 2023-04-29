@@ -1,14 +1,31 @@
-if you download this from github, run npm install to re-download the node_modules folder with important dependencies.
+if you download this from github, run npm install to re-download the node_modules folder with important dependencies. Find a set of dependencies used in package.json
+Make sure that any dependencies meant for the backend are correspondingly installed in the /backend folder. Find a set of dependencies for BACKEND in /backend/package.json.
 
-Parts:
-MAIN APP:
-    index.js
+
+Tutorials watched>
+
+For creating click events:
+    https://www.youtube.com/watch?v=0XSDAup85SA&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=7&ab_channel=TheNetNinja
+For adding components (html sections) from other files:
+    https://www.youtube.com/watch?v=0sSYmRImgRY&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=6&ab_channel=TheNetNinja
+For adding JS values into HTMl files
+    https://www.youtube.com/watch?v=pnhO8UaCgxg&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=5&ab_channel=TheNetNinja
+Dynamic variables (states)
+    https://www.youtube.com/watch?v=4pO-HcG2igk&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=8&ab_channel=TheNetNinja
+Dynamic variables passing into other child components
+    https://www.youtube.com/watch?v=PHaECbrKgs0&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=11&ab_channel=TheNetNinja
+
+----
+Parts>
+BACKEND:
+App:
+    /backend/index.js
 
 Connection to MONGODB, SINGIN:
 Server & Mongo
-    server.js:
+    /backend/server.js:
         internal server setup & organization for hosting the website.
-    index.js
+    /backend/index.js
         connects to the mongoDB server under an account given in the connect() method, and then "injects" the mongoDB class into the given DAO files (entriesDAO, modDAO) so that they can use mongoDB methods.    
 Routes & Server
     entriesroute.js file: 
@@ -26,6 +43,12 @@ App:
         main "application" control. Injects an app into HTML elements with the "root" ID & controls page-rendering. "Control-center".
     App.js 
         main application file for the homepage, controls its layout.
+Database Connection:
+    database.js
+        direct method calls to the backend using standardized mongoDB / atlas methods (post, patch, delete, etc), using method-definitions given in http-common.js
+    http-common.js
+        gives url for connection to mongodb database, which gives actual method calls to the database (.get, .post, .patch, .delete, etc)
+    
 Components:
     navbarcomponent.js 
         used as a template for the navbar, which is shared between most pages. Links mostly to ROUTES established within the react application.
@@ -38,47 +61,99 @@ To run back-end nodejs
     make sure you are in client
     nodemon server 
 
-Tutorials watched:
-
-For creating click events:
-    https://www.youtube.com/watch?v=0XSDAup85SA&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=7&ab_channel=TheNetNinja
-For adding components (html sections) from other files:
-    https://www.youtube.com/watch?v=0sSYmRImgRY&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=6&ab_channel=TheNetNinja
-For adding JS values into HTMl files
-    https://www.youtube.com/watch?v=pnhO8UaCgxg&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=5&ab_channel=TheNetNinja
-Dynamic variables (states)
-    https://www.youtube.com/watch?v=4pO-HcG2igk&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=8&ab_channel=TheNetNinja
-Dynamic variables passing into other child components
-    https://www.youtube.com/watch?v=PHaECbrKgs0&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=11&ab_channel=TheNetNinja
-
 ----
-Make sure that any dependencies meant for the backend are correspondingly installed in the folder.
-
-
-----
-old commands:
+[!]old commands, deprecations:L=
     poolSize
     wtimeout
     useNewUrlParse
-are deprecated as were used in index.js, and were replaced by the methods used in the file, respectively.
-----
+are deprecated as were used in /backend/index.js, and were replaced by the methods used in the file, respectively.
 
 
 
 
 ----
-SETUP WITH REAL ENTRIES:
-To access the "entries" database in haia, make sure to go to entriesDAO AND entriesmodDAO files & change collections to from "test" to "entries", and to change to the MAIN mongodb in the env file (or replace /test with /haia), along with te MAIN entries_ns file
-CREATE A NEW INDEX WITH MONGODB FOR THE REAL ENTRIES. SEE: https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org @ 44:10!
+Later Setup:
+!Replace placeholder data with proper entries
+    Add Additional Information Requests in frontend:
+        /src/pages/searchResults.js add extra fields to searchResults function.
+        /src/pages/search.js add extra fields for search parameters that can be sent off to the search results page.
+        /srs/pages/entryMod.js add extra fields to EntryMod function.
+
+        
+
+    Add Additional Fields for inputs to the DAO in:
+        EntryMod.js updateENTRY method
+        --createEntry already takes broad "data" input which does not need to be modified, since it will remain the same.
+        -
+    Add Additional Fields for insertion in:
+        entriesmod.js apiPostEntry method
+        entriesmod.js apiUpdateEntry method
+        modDAO.js addENTRY method
+        modDAO.js updateENTRY method
+
+
+!Setup with real Entries Database
+    To access the "entries" database in haia, make sure to go to entriesDAO AND entriesmodDAO files & change collections from "test" to "entries"
+    Change the ENTRIES_NS in the .env file to the one going to "haia" instead of "test"
+
+
+?Switch to using _id instead of title for updates
+    Not necessary, but would require changes to entriesmod and modDAO
+
+//Test functionality of above ^^ using postman for direct access to database, as addition of new json fields might mess with not-yet-updated frontend which will NOT deal with HID field yet.
+
+!HID implementation:
+    create HID creation & check in DAO class or CONTROLLER (preferrably controller). This will take the SOURCE first and ENTRY TITLE second to generate a stirng sequence, then check against the rest of the database for identical string sequences, THEN add a 4-digit number correspondingly.
+
+!Generalize Search:
+    Generalize Search parameters:
+        frontend [don't know the name of the js file yet]. Probably in search.js which will function as an advanced search, with "searchbar" component or searchbar in navbarcomponent.js only firing a generalized search.
+            Add search multiple compatible search parameters which will affect the "by" variable in database.js FIND method, which determines what criteria we are using to search. Default would be ALL and would generate a search for if the searched-for query matches ANYTHING in the database.
+        database.js FIND method
+            Configure to allow for multiple search parameters to be input into the "find"
+        entriesController.js
+        entries DAO.js
+    ?ID-specific searches:
+        database.js GET method: Id-specific searches direct to using the get (by hid) method? reconfigure to call an http.get method that finds by hid specifically.
+    
+
+
+
+
+
+
+
+
+
+!Indexes
+    CREATE A NEW INDEX WITH MONGODB FOR THE REAL ENTRIES. SEE: https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org @ 44:10!
 
 ---
 ADD ALL PROPER ENTRIES TO DAO AND CONTROLLER/MOD CLASSES!
 
 ----
-Later reference:
+
+
+----
+Far-down goals:
+
+!Word-based search
+    Configure search so that it can also parse between WORDS and give results based not just on entire string matches, but individual word matches, too. At least inasfar as TITLE / SUBTITLE are concerned.
+
+!Language-Sensitive Searches
+    Have translated titles for images in different languages (than English) which would allow for cross-language compatibility for results given in different languages. (would be difficult to generalize further).
+
+?Specific dev account 
+    Configure so I as a developper use a different mognoDB login to access a developper-associated account, vs common accounts which only have read-database access.
+
+
+----
+Far-down reference:
 If you intend on adding a user system to the database, and want to have user-updates or other interactions verifying an interaction, consider watching https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org at 48:06
 FINAL DATABASE SETUP:
-Chance DB access to ONLY read, on MongoDB
+Change DB access to ONLY read, on MongoDB
+Set all GET methods in the entriesDAO to NOT return _id from mongoDB database as part of the json return.
+
 
 ----
 Read/write pass:
