@@ -5,19 +5,30 @@ import http from "../http-common";
 
 class EntryDataService {
     //Retrieve ALL entries; for the purposes of modification (entryMod). Adds a page parameter
-    static getAll(page = 1){
+    static getAllPaginated(page = 1){
         return http.get(`?page=${page}`);
+    }
+    //Retrieve ALL entries; for the purposes of modification (entryMod). Adds a page parameter
+    static getAll(){
+        return http.get();
     }
     //For returning the contents of a specific entry by id, for the entry display. Will ideally use hID later.
     static get(id){
         return http.get(`/id/${id}`);
     }
-    //Initiate a particular search and retrieve results which fit that title
-    static find(query, by="title", page=1){
+    //Initiate a particular search and retrieve results which fit, paginated. Default look for title.
+    static findPaginated(query, by="title", page=1){
         //If "!by" (if by is null), implement a generalized search.
         //Else, take the ARRAY of parameters given to "by" and execute a search using ANY of them to generate a hit.
         return http.get(`?${by}=${query}&page=${page}`);
     }
+    //Initiate a particular search and retrieve results which fit, paginated. Default look for title.
+    static find(query, by="title"){
+        //If "!by" (if by is null), implement a generalized search.
+        //Else, take the ARRAY of parameters given to "by" and execute a search using ANY of them to generate a hit.
+        return http.get(`?${by}=${query}`);
+    }
+    //Mod-exclusive functions.
     static createEntry(data){
         //On front-end, there should be a flag that freaks out if title, source, . HID is to be generated in back-end controller process.
         return http.post("/modify", data);
