@@ -102,24 +102,10 @@ const SearchResults = (props) => {
     if(mode){
         //If "by" is text, we should execute a regular search looking for matches in ALL fields.
         if(by[0] == "text"){
-          EntryDataService.getAll()
+          EntryDataService.get(query[0], by[0])
             .then(response => {
               console.log(response.data, "text-based all-search");
-              let matchingSet = [];
-              let result_i = []
-              //For each value in our returned dataset...
-              for(let i = 0; i < response.data.results.length; i = i + 1){
-                let matching = true;
-                //Check for each possible field. If ANY field as a value matching the query, add it to the matching set.
-                result_i = Object.values(response.data.results[i]);
-                if(result_i.includes(query[0])){
-                  matchingSet.push(result_i);
-                }
-                else if(result_i["keywords"].includes(query[0])){
-                  matchingSet.push(result_i);
-                }
-              }
-              setEntries(matchingSet);
+              setEntries(response.data.entries);
               mode = false;
             })
             .catch(error => {

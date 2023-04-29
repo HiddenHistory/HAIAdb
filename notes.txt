@@ -134,8 +134,6 @@ Later Setup:
 
 
 
-!Indexes
-    CREATE A NEW INDEX WITH MONGODB FOR THE REAL ENTRIES. SEE: https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org @ 44:10!
 
 ---
 ADD ALL PROPER ENTRIES TO DAO AND CONTROLLER/MOD CLASSES!
@@ -162,7 +160,8 @@ If you intend on adding a user system to the database, and want to have user-upd
 FINAL DATABASE SETUP:
 Change DB access to ONLY read, on MongoDB
 Set all GET methods in the entriesDAO to NOT return _id from mongoDB database as part of the json return.
-
+Add context & description searching. Right now, this does not see feasible because 
+Create indexes for increased efficiency in search queries to mongodb: https://www.youtube.com/watch?v=mrHNSanmqQ4&ab_channel=freeCodeCamp.org @ 44:10!
 
 ----
 Read/write pass:
