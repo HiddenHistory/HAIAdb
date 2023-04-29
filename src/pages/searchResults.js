@@ -196,7 +196,7 @@ const SearchResults = (props) => {
     let forpage = [];
     //If the amount of results (stored to entries in the first part of the method) is equal to or less than the amount of entries per page; we already know what to set our page values to be.
     if(arrayInput.length <= entriesPerPage){
-        forpage = arrayInput;
+        forpage = [...arrayInput];
     }
     //If the amount of results is NOT equal to the amount of entries per page, we must determine what to show on the page out of a larger set.
     else{
@@ -207,7 +207,6 @@ const SearchResults = (props) => {
     }
     //These values will be displayed on the page.
     setForThisPage(forpage);
-    console.log(forThisPage, "for this page")
   }
 
   return (2
