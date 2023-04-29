@@ -80,7 +80,9 @@ const AdvancedSearch = () => {
                             title:searchTitle,
                             source:searchSource,
                             keywords:searchKeywords,
-                            entriesPerPage:searchEntriesPerPage
+                            entriesPerPage:searchEntriesPerPage,
+                            page:1,
+                            mode:true
                         }
                     }
             > {

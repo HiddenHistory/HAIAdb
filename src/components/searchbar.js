@@ -29,9 +29,13 @@ const SearchBar = () => {
         <Link   to={
                     "/search:find/"
                 }
+                //Sends over a props file to the searchResults page, indicating what text we are looking for, how many entries per page, which page we will be viewing, and whether we need to actually connect to the database to find it.
                 state={
                     {
-                        text:text
+                        text:text,
+                        entriesPerPage:"25",
+                        page:1,
+                        mode:true
                     }
                  }>
             <button className="searchButton"
