@@ -56,6 +56,10 @@ export default class entriesController{
                 filters.hid = req.query.hid;
             }
         }
+
+        if(req.exact?.yes){
+            entriesPerPage=1;
+        }
         
         //Send a search query to the mongoDB database to get values for: the total list of results AND 
         //MAKE SURE THAT THERE ARE NO ERRORS IN entries.DAO, because CALLS TO METHODS FROM IT IN entriescontroller.js WILL NOT SEE THOSE ERRORS, AND WILL INSTEAD SIMPLY NOT RETURN A VALUE AND THEREBY CRASH AND PREVENT A RESOLUTION OF THE PROMISE, THUS BLOCKING A CONNECTION TO THE LOCALHOST SIT

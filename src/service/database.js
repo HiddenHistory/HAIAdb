@@ -13,8 +13,8 @@ class EntryDataService {
         return http.get();
     }
     //For returning the contents of a specific entry by id, for the entry display. Will ideally use hID later.
-    static get(id){
-        return http.get(`/id/${id}`);
+    static get(query, by){
+        return http.get(`?${by}=${query}&match=exact`);
     }
     //Initiate a particular search and retrieve results which fit, paginated. Default look for title.
     static findPaginated(query, by, page, entriesPerPage){

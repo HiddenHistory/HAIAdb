@@ -36,7 +36,7 @@ function Entry(props) {
     async function getEntry() {
       //If the params value has not been overwritten, this means we should use it for locating the entry in question.
       if(params){
-        EntryDataService.get(params)
+        EntryDataService.get(params.hid, "hid")
           .then(response => {
             console.log(response.data, "response retrieved from database.")
             setEntry(response.data.results[0]);
