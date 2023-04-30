@@ -4,7 +4,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { countryList } from '../dev/countryList.js'
+import { countryList } from '../dev/countryList.js';
+import { idfromName } from '../dev/idfromName.js';
 
 //Import database class to access methods which allow for communications with database.
 import database from '../service/database';
@@ -12,6 +13,7 @@ import database from '../service/database';
 const EntryMod = props => {
 
   let country_toISO = countryList;
+  let idfromName = idfromName;
   /*Notes on REACT function organization*/
     //Before reaching the return bloc in any app return section, we may declare any number of variables and work wiht them. REMEMBER THAT!
     //We may accordingly access those variables wiht the syntax { varname } as if it were either html section code or page text (inwhich case, the contents of the value are converted ot a string before input).
@@ -26,39 +28,92 @@ const EntryMod = props => {
 
     //Add the delete process to this class to send off delete requests.
     const deleteEntry = die =>{
-      database.deleteEntry(die)
-            .catch(error => {
-              console.log(error);
-              setCommands([String.toString(error), ...commands]);
-            });
+      if(die.length == 24){
+        database.deleteEntry(die)
+              .catch(error => {
+                console.log(error);
+                setCommands([String.toString(error), ...commands]);
+              });
+          }
+      else{
+        setCommands(["Invalid deletion request!"])
+      }
     }
 
     const updateEntry = change => {
-      let updateObj = {}
-      //Check input and if any invalids then return (end)
-      
-      database.updateEntry();
-      
+      let updateBody = requestChop(change, 7);
+      let updateObj = JSON.parse(updateBody);
+      let updated;
+
+      //Check for essential properties. If any invalids then return (end)
+      if("hid" in updateObj){
+        //Retrieve the object to be updated, or throw an error if it was not found.
+        database.get(updateObj.hid, "hid")
+              .then(response => {
+                  console.log(response.data.results);
+                  //Update using the merging of the original object and the new set of contents, overwriting older contents which conflict.
+                  updated = {...response.data.results[0], ...updatedBody}
+                  //Update our log of commands.
+                  setCommands([JSON.stringify(response.data.results[0]) + '=>' + JSON.stringify(updated), ...commands]);
+                  database.updateEntry(updated);
+              })
+              .catch(error => {
+                console.log(error)
+                setCommands(["Entry does not exist in the database!", ...commands])
+              })
+      }
+      else{
+        setCommands([JSON.stringify(addObj), ...commands])
+        throw new Error("Invalid input!", addObj)
+      }
     }
 
     const postEntry = add => {
-      let addObj = {}
-      let hid;
-      //check input and if any invalids then return (end)
-        
+      let addBody = requestChop(add, 5);
+      let addObj = JSON.parse(addBody);
+
+      if(addObj.hasOwnProperty("title") && "src" in addObj && "keywords" in addObj && "url" in addObj && "country" in addObj){
       //If the post-entry is valid, then we will generate an hid.
-      //First, retrieve any potentially matching hid vales from the database through a simple search query by hid.
-      database.find(addObj.hid, hid)
-          .then(response => {
-            console.log(response.data.results)
-            let i = response.data.results.length;
-            //...
-            database.createEntry(addObj);
-          })
-          .catch(error => {
-            console.log(error)
-          })
+      //Retrieve country code
+        let tempHID = country_toISO[addObj.country]
+        //Use source to generate a book-code for the entry.
+        if(addObj.shortsrc){
+          tempHID = tempHID + idfromName[addObj.shortsrc];
+        }
+        else{
+          tempHID = tempHID + idfromName[addObj.src]
+        }
+        //First, retrieve any potentially matching hid vales from the database through a simple search query by hid, unpaginated.
+        database.find(tempHID, "hid")
+            .then(response => {
+              console.log(response.data.results)
+              //Then, use the size of the resulting set of HIDs to determine the numerical value to follow the base-tempHID (specifically, how many 0s.).
+              let i = (response.data.results.length + 1) + '';
+              for(let o = i.length; o < 4; o++){
+                i = '0' + i;
+              }
+              addObj.hid = tempHID + i;
+              database.createEntry(addObj);
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+        else{
+          setCommands([JSON.stringify(addObj), ...commands]);
+          throw new Error("Invalid input!", addObj)
+        }
     }
+
+    //Method meant to remove command request, since we already have determined that & acted appropriately.
+    function requestChop(string, to){
+      return string.substring(to)
+    }
+    
+    /*//Method meant to determine the individual fields
+    function fieldQuery(string, param){
+
+    }*/
 
     function commandSend(string){
       //this is a delete request
@@ -70,7 +125,7 @@ const EntryMod = props => {
         console.log('update request');
       }
       //this is a post request.
-      else if(string.substring(0,4) =='post:'){
+      else if(string.substring(0,5) =='post:'){
         console.log('post request');
       }
       else if(string.substring(0,4) =='clear'){

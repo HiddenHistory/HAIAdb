@@ -20,8 +20,8 @@ function Entry(props) {
     var params = useParams(); //params = location.state?.id ? null : useParams();
     const location = useLocation();
 
-    //Would rather use the location state, if there is one, than reaccess te database. As such, if there is a location state
-    if(location.state?.id){
+    //Would rather use the location state, if there is one, than reaccess te database. As such, if there is a location state, do not use the parameters.
+    if(location.state?.hid){
       params = null;
     }
 

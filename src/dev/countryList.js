@@ -1,4 +1,6 @@
 const countryList = {
+  //Unknown country
+  "UNK":"UN",
   Afghanistan: 'AF',
   'Aland Islands': 'AX',
   Albania: 'AL',
@@ -246,7 +248,11 @@ const countryList = {
   Zimbabwe: 'ZW',
   'North Macedonia': 'MK',
   Češka: 'CZ',
-  Unk: "unk"
+  Unk: "unk",
+  //Regions:
+  Senegambia:"SGM",
+  Abyssinia:"AB",
+  "Gold Coast":"GC"
 }
 
 module.exports = countryList;

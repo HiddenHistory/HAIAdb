@@ -15,6 +15,7 @@ export default class entriesMod{
             const src = req.body.src
             const keywords = req.body.keywords
             const url = req.body.url
+            const hid = req.body.hid
             
             //Call the post method in the entriesmodDAO page and add a post with the info as defined in the request.
             //ADD ALL FIELDS WHEN MODIFYING FOR THE FINAL SETUP!
@@ -22,7 +23,8 @@ export default class entriesMod{
                 title,
                 src,
                 keywords,
-                url
+                url,
+                hid
             )
             //If the post was successful, return a json file with "success".
             res.json({status: "success"})

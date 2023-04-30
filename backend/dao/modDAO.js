@@ -27,13 +27,14 @@ export default class entriesmodDAO {
     }
 
     //Adds an entry. ADD the other input fields
-    static async addEntry(title, src, keywords, url){
+    static async addEntry(title, src, keywords, url, hid){
         try{
             const entryDoc = { //The tutorial uses a user class that will contain its own id. I will not.
                 title: title,
                 src: src,
                 keywords: keywords,
-                url: url
+                url: url,
+                hid: hid
             }
             //Insert into the database
             return await modDao.insertOne(entryDoc);
@@ -44,12 +45,12 @@ export default class entriesmodDAO {
     }
 
     //Update entry, currntly identified by title, will later be identified by id and/or hid
-    static async updateEntry(title, src, keywords, url){
+    static async updateEntry(title, src, keywords, url, hid){
         try{
             //Could I do field selections for declarations using actual variables instead of 'src', 'keywords', 'url'? If so, I could write a loop to determine how many of the potential inputs are NULL and how many exist, write the ones that exist into an ARRAY, and then pass those into the SET command along with the given value
             const updateEntry = await modDao.updateOne(
-                {title:title}, //Does this need to be a set?
-                {$set: {title:title, src: src, keywords:keywords, url: url}}
+                {hid:hid}, //Does this need to be a set?
+                {$set: {title:title, src: src, keywords:keywords, url: url, hid:hid}}
             )
             return updateEntry;
         }
