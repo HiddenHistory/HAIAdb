@@ -17,7 +17,7 @@ export default class entriesmodDAO {
         //dev code
         //connect to the "entries" collection within the "haia" database.
         //entries = await conn.db(process.env.ENTRIES_NS).collection("entries");
-        modDao = await conn.db(process.env.ENTRIES_NS).collection("categories");
+        modDao = await conn.db(process.env.ENTRIES_NS).collection("haiabase");
     }
     catch (err) {
         console.error(
@@ -48,7 +48,7 @@ export default class entriesmodDAO {
         try{
             //Could I do field selections for declarations using actual variables instead of 'src', 'keywords', 'url'? If so, I could write a loop to determine how many of the potential inputs are NULL and how many exist, write the ones that exist into an ARRAY, and then pass those into the SET command along with the given value
             const updateEntry = await modDao.updateOne(
-                {title:title},
+                {title:title}, //Does this need to be a set?
                 {$set: {title:title, src: src, keywords:keywords, url: url}}
             )
             return updateEntry;

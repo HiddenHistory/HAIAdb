@@ -52,7 +52,7 @@ export default class entriesMod{
             //Process te update request by determining whether or not we are dealing with keywords or a keyword at an index
             //Contact the DAO server with the given contents and therefore update the given post.
             const verifyUpdated = await entriesmodDAO.updateEntry(
-                //hid
+                hid,
                 title,
                 src,
                 keywords,

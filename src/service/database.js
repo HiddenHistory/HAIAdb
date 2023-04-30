@@ -17,7 +17,7 @@ class EntryDataService {
         return http.get(`/id/${id}`);
     }
     //Initiate a particular search and retrieve results which fit, paginated. Default look for title.
-    static findPaginated(query, by, page){
+    static findPaginated(query, by, page, entriesPerPage){
         //If "!by" (if by is null), implement a generalized search.
         //Else, take the ARRAY of parameters given to "by" and execute a search using ANY of them to generate a hit.
         return http.get(`?${by}=${query}&page=${page}`);

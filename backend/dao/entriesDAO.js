@@ -17,7 +17,7 @@ export default class entriesDAO {
         //dev code
         //connect to the "entries" collection within the "haia" database.
         //entries = await conn.db(process.env.ENTRIES_NS).collection("entries");
-        entries = await conn.db(process.env.ENTRIES_NS).collection("categories");
+        entries = await conn.db(process.env.ENTRIES_NS).collection("haiabase");
     }
     catch (err) {
         console.error(

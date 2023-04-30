@@ -73,7 +73,7 @@ const AdvancedSearch = () => {
                 //ADD ADDITIONAL PARAMETERS ON FINAL IMPLEMENTATION!
             }
             <Link   to={
-                        "/search:find/"
+                        "/search/AdvBar"
                     } 
                     state={
                         {

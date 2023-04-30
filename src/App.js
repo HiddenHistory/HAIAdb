@@ -44,7 +44,7 @@ function App() {
         {
           //If I am on searchResults, display the contents of the searchresults class. This takes in props given by the search components (either advancedsearch.js OR searchbar)
         }
-        <Route path={'/search:find'} element={<SearchResults/>} />
+        <Route path={'/search/:find'} element={<SearchResults/>} />
 
 
 
@@ -53,10 +53,7 @@ function App() {
               the render is not controlled simply using a component part like with Home, but instead by using a specific render function which passes in props. The props will initiate a method call in Entry, which will in turn determine which entry to display.
           */
         }
-        <Route path ={'/entry/:id'}
-            render={(props) => (
-              <Entry {...props} />
-            )}
+        <Route path ={'/entry/:hid'} element={<Entry />}
             />
         
         {

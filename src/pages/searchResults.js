@@ -13,7 +13,7 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import EntryDataService from '../service/database';
 
 //Takes in a set of props (inputs) from the search request which it will use when requesting things from the database for the results display.
-const SearchResults = (props) => {
+const SearchResults = () => {
 /* SEARCH PREPARATION */
   //location will contain values passed in through the search pages.
   const location = useLocation();
@@ -209,8 +209,8 @@ const SearchResults = (props) => {
     setForThisPage(forpage);
   }
 
-  return (2
-    //There should be a button somewhere that initiates a new search query using the same conditions as before but with the page value incremented, to display the next set of search results.
+  return (
+    <div>{forThisPage.length}</div>
   )
   }
   //Return the app contents to the file
