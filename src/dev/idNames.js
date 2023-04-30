@@ -1,5 +1,5 @@
 //Class containing reference for how each possible book name converts to an hid code.
-const namefromID = {
+const idNames = {
     "DEMO":"DEM",
     //Books
     "THE VOICE OF AFRICA":"VOA",
@@ -46,4 +46,4 @@ const namefromID = {
     
 
 }
-module.exports = namefromID;
+module.exports = idNames;

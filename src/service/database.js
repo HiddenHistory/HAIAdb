@@ -38,8 +38,9 @@ class EntryDataService {
         return http.patch('/modify', data);
     }
     static deleteEntry(data){
+        /*NOTE THIS: FOR SOME REASON, AXIOS SEEMS INCAPABLE OF PASSING IN A REQ BODY WHEN RUNNING A DELETE REQUEST. LITERALLY JUST GIVES AN EMPTY BODY. WAS DRIVING ME MAD! PLEASE REMEMBER THAT, BECAUSE OF THIS, WE HAVE TO RELY ON "ILLEGAL ACTIVITY" (SMUGGLING) TO PUSH THROUGH OUR DELETION ACTIVITY TO THE BACKEND ---- EITHER: FAKEOUT AXIOS BY SENDING A RANDOM REQUEST TO PASS THE ID THROUGH ONLY TO THEN CALL AN ACTUAL DELETION METHOD IN BACKEND, OR FORCE THROUGH THE REQUEST BY PASSING IT INTO THE REQUEST URL ****AS A STRING**** SO THE BACKEND IS ABLE TO RETRIEVE IT. RIDICULOUS.*/
         //On front-end, there should be a freak-out flag if the ID given is invalid! (wrong char count) to prevent even an attempt an an improper deletion request.
-        return http.delete(`/modify?id=${data}`);
+        return http.delete(`/modify?$del=${data}`);
     }
 }
 
