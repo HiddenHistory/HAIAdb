@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import countryList from '../dev/countryList.js';
 import idNames from '../dev/idNames.js';
+import '../style/devstyle.css'
 
 //Import database class to access methods which allow for communications with database.
 import database from '../service/database';
@@ -23,7 +24,6 @@ const EntryMod = props => {
     
     const [commands, setCommands] = useState([])
     const [text, setText] = useState("");
-
     //useEffect communicates that the render of this component is not complete even after a page load, so that the page can continue to render
 
     //Add the delete process to this class to send off delete requests.
@@ -62,7 +62,7 @@ const EntryMod = props => {
                 })
                 .catch(error => {
                   console.log(error)
-                  setCommands(["Entry does not exist in the database!", ...commands])
+                  setCommands(["Entry does not exist in the database!", ...commands,])
                 })
         }
         else{
@@ -71,7 +71,7 @@ const EntryMod = props => {
         }
     }
     catch(error){
-      setCommands([updateBody,"Invalid Input", ...commands])
+      setCommands([...commands, updateBody,"Invalid Input"])
       console.log("Invalid input!", updateBody)
     }
     }
@@ -84,7 +84,14 @@ const EntryMod = props => {
         if(addObj.hasOwnProperty("title") && "src" in addObj && "keywords" in addObj && "url" in addObj && "country" in addObj){
         //If the post-entry is valid, then we will generate an hid.
         //Retrieve country code
-          let tempHID = country_toISO[addObj.country]
+        let tempHID = '';
+          if(country_toISO[addObj.country]){
+            tempHID = country_toISO[addObj.country]
+          }
+          else{
+            setCommands("Invalid country input!", ...commands)
+            return
+          }
           //Use source to generate a book-code for the entry.
           if(addObj.shortsrc){
             tempHID = tempHID + idfromName[addObj.shortsrc.toUpperCase()];
@@ -145,8 +152,8 @@ const EntryMod = props => {
         console.log('post request');
         postEntry(string);
       }
-      else if(string.substring(0,4) =='clear'){
-        setCommands([]);
+      else if(string == 'clear'){
+        console.log('clear request');
       }
       
     }
@@ -154,37 +161,46 @@ const EntryMod = props => {
 
     //for each of the entry modification thingies, 
   
-    return (
-      <div className="content">
-        This is the backend, the back of things.
-        <input  type="text"
-                className="barMod"
-                placeholder=""
-                value={text}
-                onChange={e => setText(e.target.value)}
-                onKeyUp={e => 
-                  {if(e.key == 'Enter'){
-                    commandSend(text);
-                    setCommands([text, ...commands]);
-                    setText("");
-                    console.log("Enter pressed");
-                  }}
-                }
-        />
-        <button className="barMod"
-                onClick={ () =>{
-                  commandSend(text);
-                  setCommands([text, ...commands]);
-                  setText("");
-                }
-                  }/>
+  return (
+<div className ="developerPage">                          {/* Encompassing div to wrap all contained elements*/}
+        
+        {/*Div to contain the input history to the console.*/}
+        <div className="consoleLog">
+        {  commands.map((entry, keyval) => (
+            <div className="indvLog" key={keyval}>
+              {entry}
+            </div>
+          ))
+        }
+        </div>
 
-
-
-
-      </div>
-    );
-  }
+        {/*Div to contain the actual input bar.*/}
+        <div className="barMod">
+            {/*Command input*/}
+            <input  className="bar"
+                    type="text"
+                    placeholder=""
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    onKeyUp={e => 
+                      {if(e.key == 'Enter'){
+                        commandSend(text);
+                        setCommands([text, ...commands]);
+                        setText("");
+                        console.log("Enter pressed");
+                      }}
+                    }
+            />
+          {/*Button in case you want to press a button to send the input*/}
+          <button   onClick={ () =>
+                      {commandSend(text);
+                       setCommands([text, ...commands]);
+                       setText("");
+                      }
+          }/>
+          </div>
+</div>);
+}
   
   //Return the app contents to the file
   export default EntryMod;

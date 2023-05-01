@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400");
+
+/*For the entryMod page, set element fonts to Red Hat Mono.*/
+.developerPage{
+    font-family:Roboto Mono;
+    position:center;
+    
+    display:flex;
+    flex-direction:column;
+
+    /*positioning*/
+    bottom:30px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:2vh;
+    right:0;
+
+    /*dimensions*/
+    height:90vh;
+    width:95vw;
+
+    /*box sizing*/
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:5px;
+    padding-bottom:0;
+
+    /*style*/
+    border-color:black;
+    border-style:solid;
+    border-width:0px;
+    border-radius:2px;
+
+    /*text styling*/
+    font-size:15px;
+}
+
+.consoleLog{
+    /*Positioning*/
+    margin-top:auto;
+
+    /*layout organization*/
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column-reverse;
+
+    /*box sizing*/
+    padding:5px;
+}
+
+/*For later implementation -> Console interactions colors.*/
+.indvLog.post{
+    color:rgb(165, 217, 249);
+}
+.indvLog.update{
+    color:rgb(165, 249, 190);
+}
+.indvLog.delete{
+    color:rgb(249, 220, 165);
+}.indvLog.error{
+    color:rgb(249, 165, 165);
+}
+
+.consoleLog::-webkit-scrollbar{
+    background:rgb(250, 250, 250);
+    opacity:0;
+}
+.consoleLog::-webkit-scrollbar-thumb{
+    background:#DCDCDC;
+}.consoleLog::-webkit-scrollbar-thumb:hover{
+    background:#c5c5c5;
+}
+
+.barMod{
+    /*Positioning*/
+    margin-top:0;
+
+    padding-bottom:0;
+
+    /*Scaling*/
+    width:100%;
+
+    /*Borders*/
+    border-top:2px;
+    border-bottom:0px;
+    border-left:0px;
+    border-right:0px;
+    border-style:solid;
+
+    /*Positioning of children elements*/
+    display:flex;
+}
+
+.barMod input {
+    border:0;
+    outline:none;
+    width:100%;
+
+    font-family:Roboto Mono;
+    font-size:15px;
+    
+    /*Change the text-cursor (caret) for that extra terminal feel.*/
+    caret-shape:block;
+
+}
+
+.barMod button{
+    border:0;
+    width:10%;
+    background:#c4c4c4;
+}
+
+.barMod button:hover{
+    background:#909090
+}
+
+
+
+/*For the input bar and its components in the entryMod page, set: abosolute position*/
+/*.barMod{
+
+}*/
