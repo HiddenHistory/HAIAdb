@@ -1,7 +1,6 @@
 //Framework imports
 import React from "react";
 //Component imports
-import Navbar from './components/navbarcomponent';
 import SearchBar from './components/searchbar';
 //Page imports
 import Home from './home';
@@ -9,6 +8,7 @@ import Entry from './pages/entry';
 import SearchResults from './pages/searchResults';
 import AdvSearch from './pages/advancedSearch';
 import EntryMod from './pages/entryMod';
+import haiastyles from "./style/haiastyles.css"
 
 import { Routes, Route, Link} from "react-router-dom";
 
@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div className="content">
-      <Navbar />
       {
         //This section controls movement between a series of routes, each of which corresponds to an js docuemnt encoding for an html page body, which will control what displays in the client page.
       }

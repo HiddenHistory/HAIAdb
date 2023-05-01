@@ -79,7 +79,10 @@ function Entry(props) {
   
     return (
       <div className="content">
-        {JSON.stringify(params)}
+        <img src={entry.url} id="ENTRYIMG"></img>
+        <h2>{entry.title}</h2>
+        <span>{entry.hid}</span>
+        <div>{entry.src}</div>
       </div>
     );
   }

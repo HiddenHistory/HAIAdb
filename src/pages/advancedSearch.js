@@ -1,7 +1,14 @@
 //Imports
+
+//Image Imports
+import logo from "../img/haia.png"
+
+import "../style/haiastyles.css"
+
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Navbar from '../components/navbarcomponent';
 
 //Import database class which allows for communications with database.
 import EntryDataService from '../service/database';
@@ -29,7 +36,18 @@ const AdvancedSearch = () => {
     //When the search button is hit, we are going to retrieve the values from each of the input box fields, and we are going to pass them into the prop for the searchResults page, which will contain the actual results of the searc aswell as a pagination system.
     return (
       <div className="content">
-        Hi
+        
+        <div className = "top">
+                <div className="homeBar">
+                    <span className="siteHeadSmall"> - Advanced search - </span>
+                </div>
+                <div className="navCont">
+                {/*Navbar component, not including search-bar.*/}
+                <Navbar />
+                <div className="horzLine"/>
+                </div>
+            </div>
+
         {
             /*Separate searchbars to record different search information. Comprised of:
                 type: records that the search values are recording Strings
@@ -39,25 +57,29 @@ const AdvancedSearch = () => {
 
             */ 
         }
-        <div id="searchbars">
-            <input  type="text"
-                    className="searchBar"
-                    placeholder="Title text for search"
-                    value={searchTitle}
-                    onChange={e=>setSearchTitle(e.target.value)}
-            />
-            <input  type="text"
-                    className="searchBar"
-                    placeholder="Source text for search"
-                    value={searchSource}
-                    onChange={e=>setSearchSource(e.target.value)}
-            />
-            <input  type="text"
-                    className="searchBar"
-                    placeholder="Keywords for search (separate by comma)"
-                    value={searchKeywords}
-                    onChange={e=>setSearchKeywords(e.target.value)}
-            />
+        <form id="SEARCHFORM">
+            <div id="ADVSEARCHBARS">
+                <input  type="text"
+                        className="searchBar"
+                        placeholder="Title text for search"
+                        value={searchTitle}
+                        onChange={e=>setSearchTitle(e.target.value)}
+                />
+                <input  type="text"
+                        className="searchBar"
+                        placeholder="Source text for search"
+                        value={searchSource}
+                        onChange={e=>setSearchSource(e.target.value)}
+                />
+                <input  type="text"
+                        className="searchBar"
+                        placeholder="Keywords for search (separate by comma)"
+                        value={searchKeywords}
+                        onChange={e=>setSearchKeywords(e.target.value)}
+                />
+            </div>
+
+            <div id="ADVBUTTONS">
             <select  
                     className="dropdown"
                     onChange={e=>setSearchEntriesPerPage(e.target.value)}
@@ -94,9 +116,11 @@ const AdvancedSearch = () => {
                     Search 
                 </button>
             </Link>
-            
+            </div>
+        </form>
+        <div className="featured Image">
+            <img src="https://drive.google.com/uc?id=1ysqtSrWlQZbauhH5jPPjZO0Wp-U5I5Uy"/>
         </div>
-        
       </div>
     );
 

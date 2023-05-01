@@ -42,7 +42,7 @@ export default class entriesDAO {
         //If our filter is "text", this means we are executing a general search and are looking for a word match in any field.
         if(filters.text){
             query={
-                $or:[{title:{"$regex":filters.text, "$options":"i"}}, {src:{"$regex":filters.text, "$options":"i"}}, {keywords:filters.text}]
+                $or:[{title:{"$regex":filters.text, "$options":"i"}}, {src:{"$regex":filters.text, "$options":"i"}}, {hid:{"$regex":filters.text, "$options":"i"}}, {keywords:filters.text}]
             }
         } // modify this full query: $or:[{title:filters.text}, {subtitle:filters.text}, {src:filters.text}, {description:filters.text}, {context:filters.text}, {keywords:filters.text}, {tags:filters.text}, {authors:filters.text}]
         //If our filter type is not "text", this means we are executing an advanced search with specific field checks

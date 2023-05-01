@@ -1,22 +1,26 @@
 import { Switch, Route, Link} from "react-router-dom";
 import React from "react";
+import "../style/haiastyles.css";
+import SearchBar from './searchbar';
+import youtubeLogo from "../img/youtubelogo.svg"
 
 //Component for the nav bar, which will be shared by all webpages in site.
 const Navbar = () => {
     return ( 
+        <div className = "navWrap">
         <nav className="navbar">
-            <div className="links">
-                <a href="/home">Home</a>
-                <a href="/entryMod" style={{
-                    color:"white",
-                    backgroundColor: '#f1356d',
-                    borderRadius: '8px'
-                }}>make entries</a>
-                <a href="/about">About</a>
-                <a href="/advsearch">Advanced Search</a>
-                <a href="https://www.youtube.com/channel/UCaIHjtxqn6_ej_jNLUXMeiw">youtube</a>
-            </div>
+                <ul className="navbarItem"><a href="/home">Home</a></ul>
+                {
+                //<a href="/about">About</a>
+                }
+                <ul className="navbarItem"><a href="/advsearch">Advanced Search</a></ul>
+                <ul className="navbarItem"><a href="https://www.youtube.com/channel/UCaIHjtxqn6_ej_jNLUXMeiw">Youtube{/*<img src={youtubeLogo}/>*/}</a></ul>
+                <ul className="navbarItem"><a href="/entryMod">entryMod</a></ul>
+            
+            
+            
         </nav>
+        </div>
     );
 }
  

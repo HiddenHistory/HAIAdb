@@ -3,6 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import "../style/haiastyles.css"
+
 //Import database class which allows for communications with database.
 import EntryDataService from '../service/database';
 
@@ -18,9 +20,9 @@ const SearchBar = () => {
     const [text, setText] = useState("");
     
     return(
-        <div>
+        <div className="searchBar">
         <input  type="text"
-                className="searchbar"
+                className="bar"
                 placeholder="Look for things!"
                 value={text}
                 onChange={e => setText(e.target.value)}
@@ -37,9 +39,11 @@ const SearchBar = () => {
                         page:1,
                         mode:true
                     }
-                 }>
+                 }
+                 >
             <button className="searchButton"
                 type="button"
+                
             >
                 Search
             </button>

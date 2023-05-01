@@ -8,6 +8,9 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 //Access value passed through search query method.
 
+import Navbar from '../components/navbarcomponent';
+
+import "../style/haiastyles.css"
 
 //Import database class which allows for communications with database.
 import EntryDataService from '../service/database';
@@ -111,6 +114,7 @@ const SearchResults = () => {
           .then(response => {
             console.log(response.data, "text-based all-search");
             mode = false;
+            setEntries(response.data);
             dataRefresh(response.data.results);
           })
           .catch(error => {
@@ -210,7 +214,48 @@ const SearchResults = () => {
   }
 
   return (
-    <div>{forThisPage.length}</div>
+    <div id="RESULTSPAGE">
+    <div className = "top">
+                <div className="homeBar">
+                    <span className="siteHeadSmall"> - Advanced search - </span>
+                </div>
+                <div className="navCont">
+                {/*Navbar component, not including search-bar.*/}
+                <Navbar />
+                <div className="horzLine"/>
+                </div>
+    </div>
+    <div id="DEFAULTMAIN">
+      <div className="results">
+          {  forThisPage.map((entry, keyval) => (
+            <Link to={'/entry/'+ entry.hid}
+                  state={{
+                          mode:mode,
+                          page:page,
+                          entriesPerPage:entriesPerPage,
+                          text:searchData.text,
+                          title:searchData.title,
+                          src:searchData.src,
+                          keywords:searchData.keywords,
+                          allMatched:entries,
+                          object:entry
+                  }}
+            >
+                    <div className="result fadeIn" key={keyval}>
+                      <h4 id="TITLE">{entry.title}</h4>
+                      <div className="cont">
+                          <img src={entry.url}></img>
+                          <p id="HID">{entry.hid}</p>
+                      </div>
+                    </div>
+              </Link>
+            ))
+          }
+        </div>
+      <div id="NUMRESULTS">number of results: {forThisPage.length}</div>
+      </div>
+    </div>
+
   )
   }
   //Return the app contents to the file

@@ -1,0 +1,398 @@
+@import url("https://fonts.googleapis.com/css2?family=Castoro+Titling");
+@import url("https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Faustina&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Montserrat+Alternates&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comme&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Faustina:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Faustina:wght@300;400&family=Roboto+Condensed:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+/*Anim*/
+@keyframes load{
+    100%{
+        background-image:url("../img/background.jpg");
+        opacity:1;
+    }
+}
+@keyframes fadeIn{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+/*Troubleshot*/
+/*Specification was required because body was rendering strangely*/
+body{
+    padding:0;
+    border:0;
+    margin:0;
+}
+/*Universals*/
+a {
+    text-decoration:inherit
+}
+a:visited{
+    color:inherit;
+}
+.bar{
+    outline:0;
+    background-color:white;
+}
+.searchButton{
+    background-color:rgba(255, 255, 255, 0);
+    border-color:rgb(255, 255, 255);
+    border-style:solid;
+    color:rgb(255, 255, 255);
+}
+.searchButton:hover{
+    color:rgb(238, 236, 227);
+    border-color:rgb(238, 236, 227);
+}
+
+.homeBar{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+/*Animation types*/
+.fadeIn{
+    animation:fadeIn 10s;
+}
+
+/*Header of major pages.*/
+.siteHead{
+    margin-left:4vh;
+    font-family:Castoro Tilting, Faustina;
+    font-size:7vh;
+    margin-top:0;
+    margin-bottom:1.5vh;
+}
+/*Header of minor pages.*/
+.siteHeadSmall{
+    margin-left:4vh;
+    font-family:Castoro Tilting, Faustina;
+    font-size:5vh;
+    margin-top:2vh;
+    margin-bottom:1.5vh;
+}
+
+/*Remove any mark changes so I can manually determine how MARK tag affects text-color.*/
+mark{
+    background-color:inherit;
+}
+/*Colorations*/
+.colorGreen{
+    color:rgb(210, 235, 148)
+}
+.colorBlue{
+    color:rgb(148, 209, 235)
+}
+.colorRed{
+    color:rgb(235, 148, 148)
+}
+/*Note that colorBlack actually selects a dark-Grey color. For "true" Black, choose colorBlackHard*/
+.colorBlack{
+    color:rgb(80, 80, 80)
+}
+/*Note that colorBlackHard chooses a solid "true Black" coloration. For an off-Black, greyish color, choose regular colorBlack*/
+.colorBlackHard{
+    color:rgb(0, 0, 0)
+}
+.colorWhite{
+    color:rgb(253, 251, 247)
+}
+
+
+/*Specific Element-Types*/
+/*Style for navigation bar.*/
+
+.navbar{
+    /*sizing*/
+    width:100%;
+    height:10vh;
+    
+    /*additional box/positional-layout styling*/
+    padding:0;
+    /*padding-bottom:20px;*/
+    border:0;
+    
+    /*layout*/
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+
+    /*coloration*/
+    background-color:rgb(255, 255, 255);
+
+    /**/
+    text-decoration: none;
+}
+
+.navbarItem{
+    font-family:"Faustina";
+    font-size:4vh; /*Was originally 4vh! Also consider using percentage. 150% looks good*/
+    padding:0;
+    margin:0;
+}
+.navbarItem:hover{
+    color:rgb(70,70,70)
+}
+.horzDiv{
+    background-color:black;
+    width: .01vh;
+    padding-top:2vh;
+    padding-bottom:2vh;
+    margin-top:auto;
+    margin-bottom:auto;
+    border-style:solid
+}
+
+.horzLine{
+    margin-left:auto;
+    margin-right:auto;
+    height:0vh;
+    width:25%;
+    border:0px;
+    border-bottom:.5vh;
+    border-style:solid;
+}
+/*.horzLine{
+    margin-left:auto;
+    margin-right:auto;
+    height:0vh;
+    width:25%;
+    border:0px;
+    border-bottom:.5vh;
+    border-style:solid;
+}*/
+
+/*Element conditionals/"modes"*/
+/*For when elements are stikcy to top*/
+.sticky-top{
+    /*positioning*/
+    position:fixed;
+    top:0;
+}
+
+
+/*By Specific Element & Page*/
+/*Top Elements.*/
+.top img{
+    width:10vh;
+    padding:1vh;
+    padding-right:0vh;
+}
+
+.top .horzDiv{
+    margin-left:4vh;
+}
+
+/*Home Page.*/
+
+.background{
+    /*Use a background Image*/
+    background-image:url("../img/background_temp.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+    height:80vh;
+    width:auto;
+    /*Use a load animation so a lower-resolution image can be used while the higher-resolution one is accessed.*/
+    animation-name:load;
+    animation-duration:2s;
+    animation-fill-mode:forwards;
+    /*child-element positioning*/
+    position:relative;
+}
+
+.mainBody{
+    display:flex;
+}
+.transBox{
+    background-color:rgba(0, 0, 0, 0.315);
+    position:absolute;
+    right:0;
+    top:15%;
+    margin-right:5vh;
+    height:65vh;
+    width:50.5vw;
+    text-align:left;
+    color:rgb(255, 255, 255);
+    font-family:"Faustina";
+}
+#HAIATITLE{
+    padding-left:5%;
+    font-family:"Faustina";
+    font-variant:small-caps;
+    font-size:7vh
+}
+.transBox .bar{
+    background-color:rgba(255, 255, 255, 0);
+    border:0;
+    font-family:"Faustina";
+    font-weight:lighter;
+    color:white;
+    border-color:rgba(29, 29, 29, 0);
+    border-bottom-color:rgba(29, 29, 29, 0.356);
+    border-style:solid;
+    border-width:1pt;
+}
+.transBox .bar::placeholder{
+    color:rgb(255, 255, 255);
+    font-family:"Faustina";
+    font-weight:lighter;
+}
+.transBox .searchButton{
+    background-color:rgba(29, 29, 29, 0.356);
+    border-color:rgba(29, 29, 29, 0);
+    color:rgba(244, 244, 244, 0);
+    font-family:"Faustina";
+    font-weight:300;
+    border-width:1pt;
+}.transBox .searchButton:hover{
+    background-color:rgba(10, 10, 10, 0.442);
+    color:rgba(255, 255, 255, 0);
+}
+.transBox .searchBar{
+    width:100;
+    margin-right:0;
+    text-align:center;
+    margin-top:30vh;
+}
+.transBox .searchBar input{
+    width:80%
+}
+.transBox .searchBar button{
+    width:20%
+}
+
+
+/*Advanced-Search Page*/
+
+#SEARCHFORM{
+    width:100%;
+    height:25%;
+    margin-top:5%;
+    display:grid;
+    overflow:visible;
+}
+#SEARCHFORM .searchButton{
+    color:black;
+    border-color:black;
+    border-width:.1vh;
+    border-radius:1px;
+}
+#SEARCHFORM .searchButton:hover{
+    color:rgb(80,80,80);
+    border-color:rgb(80, 80, 80);
+}
+#ADVSEARCHBARS{
+    display:flex;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+    justify-content:center;
+    align-items:center;
+    width:100%
+}
+#ADVSEARCHBARS .searchBar{
+    height:80%;
+    width:17%;
+    min-height:.8vh;
+    min-width:.17vh;
+    outline:0;
+    font-family:"Faustina;"
+}
+
+#ADVBUTTONS{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    align-content:center;
+    width:100%;
+    padding-left:0;
+    margin-left:0;
+}
+
+#ADVBUTTONS button{
+    font-family:"Faustina"
+}
+#ADVBUTTONS select{
+    font-family:"Faustina"
+}
+
+/*Results Page*/
+#RESULTSPAGE{
+    box-sizing:border-box;
+    font-size:16px;
+}
+#RESULTSMAIN {
+    display:flex;
+    justify-content:center;
+}
+#RESULTSPAGE .results{
+    width:100%;
+    padding-left:5%;
+    padding-top:5%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:4vh;
+    font-family:"Faustina";
+    font-size:16px;
+    background-color:white;
+    display:grid;
+    grid-template-columns:repeat(3, 33%);
+    grid-template-rows:repeat(15, 33%);
+    grid-gap:1em;
+}
+
+.result{
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.244);
+    transition: .5s;
+}
+
+.result:hover{
+    box-shadow:  0 8px 0 rgba(0, 0, 0, 0.303);
+}
+
+
+.result{
+    display:grid;
+    position:relative;
+    box-sizing:border-box;
+    border-style:solid;
+    border:0;
+    border-bottom:4px;
+    border-bottom-color:rgb(115, 183, 231);
+    width:33%
+}
+#RESULTSPAGE .results img{
+    margin-left:auto;
+    margin-right:auto;
+    height:125px;
+}
+
+#DEFAULTMAIN a{
+    color:rgb(80,80,80);
+    text-decoration:inherit
+}
+
+
+#RESULTSPAGE .results #HID{
+    font-size:10pt;
+}
+#RESULTSPAGE .results #TITLE{
+    font-size:10pt;
+}
+
+#NUMRESULTS{
+    text-align:right;
+    padding:20px;
+    font-family:Faustina;
+}
+
+/*Entry page*/
+#ENTRYIMG{
+    width:50%
+}

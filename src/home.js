@@ -1,26 +1,50 @@
 //Class with homepage.
 //**If entrylist does NOT import, check to make sure you have not MOVED it to dev. */
 //Imports
-import { useState, useEffect } from 'react';
-import Entrylist from './dev/entrylist';
+
+//Image Imports
+import logo from "./img/haia.png"
+
+
+import "./style/haiastyles.css"
+
+//Component Imports-> React
+import {NavLink} from "react-router-dom";
+
+import { Link } from "react-router-dom";
+//Component Imports-> HAIA
+import Navbar from './components/navbarcomponent';
 import SearchBar from './components/searchbar';
 
-const Home = () => {
-    const[entries, queryResults] = useState([
-        { title: 'dwa', body:'bod', author: 'auth', id: 1 },
-        { title: 'two', body:'bod2', author: 'auth', id: 2 },
-        { title: 'three', body:'bod3', author: 'auth', id: 3 }
-    ]);
+//Method Imports->React
+import { useState, useEffect } from 'react';
 
-    const handleDelete = (id) => {
-        const newEntries = entries.filter(entry => entry.id !== id)
-        queryResults(newEntries);
-    }
+//Other imports
+import Entrylist from './dev/entrylist';
+
+const Home = () => {
 
     return ( 
         <div className="home">
-            <SearchBar/>
-            <Entrylist entries={entries} handleDelete={handleDelete}/>
+            <div className = "top">
+                <div className="homeBar">
+                    <img src={logo}/>
+                    <span className="horzDiv vertCenter"/>
+                    <span className="siteHead vertCenter">Hidden's African Image Archive</span>
+                </div>
+                <div className="navCont">
+                {/*Navbar component, not including search-bar.*/}
+                <Navbar />
+                <div className="horzLine"/>
+                <div className="sectionLine"/>
+                </div>
+            </div>
+                <div className="background mainBody">
+                    <div className="transBox">
+                        <p id="HAIATITLE"><mark className="colorWhite">HAIA</mark> - africa images archive</p>
+                        <SearchBar id="HAIATITLE"/>
+                    </div>
+                </div>
         </div>
      );
 }

@@ -73,22 +73,22 @@
 }
 
 .barMod{
-    /*Positioning*/
+    /*positioning*/
     margin-top:0;
 
     padding-bottom:0;
 
-    /*Scaling*/
+    /*scaling*/
     width:100%;
 
-    /*Borders*/
+    /*borders*/
     border-top:2px;
     border-bottom:0px;
     border-left:0px;
     border-right:0px;
     border-style:solid;
 
-    /*Positioning of children elements*/
+    /*positioning of children elements*/
     display:flex;
 }
 
@@ -99,9 +99,8 @@
 
     font-family:Roboto Mono;
     font-size:15px;
-    
-    /*Change the text-cursor (caret) for that extra terminal feel.*/
-    caret-shape:block;
+
+    background-color:rgb(253, 253, 253)
 
 }
 
