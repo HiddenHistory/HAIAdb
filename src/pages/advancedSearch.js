@@ -39,7 +39,7 @@ const AdvancedSearch = () => {
         
         <div className = "top">
                 <div className="homeBar">
-                    <span className="siteHeadSmall"> - Advanced search - </span>
+                    <span className="siteHeadSmall"> - Advanced Search - </span>
                 </div>
                 <div className="navCont">
                 {/*Navbar component, not including search-bar.*/}

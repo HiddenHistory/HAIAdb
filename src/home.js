@@ -41,8 +41,8 @@ const Home = () => {
             </div>
                 <div className="background mainBody">
                     <div className="transBox">
-                        <p id="HAIATITLE"><mark className="colorWhite">HAIA</mark> - africa images archive</p>
-                        <SearchBar id="HAIATITLE"/>
+                        <p id="HAIATITLE"><mark className="colorWhite">HAIA</mark> - africa images archive
+                        <SearchBar id="HOMESEARCH"/></p>
                     </div>
                 </div>
         </div>

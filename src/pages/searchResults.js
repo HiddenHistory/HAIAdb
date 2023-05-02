@@ -240,6 +240,7 @@ const SearchResults = () => {
                           allMatched:entries,
                           object:entry
                   }}
+                  className="indvResult"
             >
                     <div className="result fadeIn" key={keyval}>
                       <h4 id="TITLE">{entry.title}</h4>

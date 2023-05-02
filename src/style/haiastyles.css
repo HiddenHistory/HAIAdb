@@ -30,10 +30,12 @@ body{
 }
 /*Universals*/
 a {
-    text-decoration:inherit
+    text-decoration:inherit;
+    color:inherit;
 }
 a:visited{
     color:inherit;
+    text-decoration:inherit;
 }
 .bar{
     outline:0;
@@ -120,7 +122,7 @@ mark{
     
     /*layout*/
     display:flex;
-    justify-content:space-evenly;
+    justify-content:space-around;
     align-items:center;
 
     /*coloration*/
@@ -158,6 +160,9 @@ mark{
     border:0px;
     border-bottom:.5vh;
     border-style:solid;
+}
+.spacer{
+    
 }
 /*.horzLine{
     margin-left:auto;
@@ -256,13 +261,13 @@ mark{
     color:rgba(255, 255, 255, 0);
 }
 .transBox .searchBar{
-    width:100;
+    width:100%;
     margin-right:0;
     text-align:center;
     margin-top:30vh;
 }
 .transBox .searchBar input{
-    width:80%
+    width:50%
 }
 .transBox .searchBar button{
     width:20%
@@ -340,16 +345,10 @@ mark{
     box-sizing:border-box;
     font-size:16px;
 }
-#RESULTSMAIN {
-    display:flex;
-    justify-content:center;
-}
 #RESULTSPAGE .results{
     width:100%;
-    padding-left:5%;
     padding-top:5%;
-    margin-left:auto;
-    margin-right:auto;
+    padding-left:5%;
     margin-top:4vh;
     font-family:"Faustina";
     font-size:16px;
@@ -357,7 +356,8 @@ mark{
     display:grid;
     grid-template-columns:repeat(3, 33%);
     grid-template-rows:repeat(15, 33%);
-    grid-gap:1em;
+    grid-gap:2%;
+    text-align:center;
 }
 
 .result{
@@ -372,13 +372,18 @@ mark{
 
 .result{
     display:grid;
-    position:relative;
     box-sizing:border-box;
     border-style:solid;
     border:0;
     border-bottom:4px;
     border-bottom-color:rgb(115, 183, 231);
     width:33%
+}
+.indvResult{
+    width:80%;
+}
+.result h4:hover{
+    color:rgb(120, 120, 120)
 }
 #RESULTSPAGE .results img{
     margin-left:auto;
@@ -406,6 +411,35 @@ mark{
 }
 
 /*Entry page*/
-#ENTRYIMG{
-    width:50%
+#ENTRYCONTENT{
+    margin:0;
+    margin-top:5vh;
+    padding:0;
+    box-sizing:boder-box;
+    list-style:none;
+    font:"Faustina";
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+}
+.entryLeft{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+}
+.entryRight{
+    width:40%;
+    display:flex;
+    flex-direction:column;
+    align-self:center;
+    border:5%;
+    border-style:solid;
+}
+#ENTRYCONTENT img{
+    width:100%;
+}
+#ENTRYTITLE {
+    width:100%;
+    font-family:"Faustina";
 }

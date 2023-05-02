@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 //Access value passed through search query method.
 
+import Navbar from '../components/navbarcomponent';
 //Import database class which allows for communications with database in the case that one is needed.
 import EntryDataService from '../service/database';
 
@@ -78,11 +79,29 @@ function Entry(props) {
     //If not, use the actual entry URL for the parameter to get something from the database.
   
     return (
-      <div className="content">
-        <img src={entry.url} id="ENTRYIMG"></img>
-        <h2>{entry.title}</h2>
-        <span>{entry.hid}</span>
-        <div>{entry.src}</div>
+      <div>
+        <div className = "top">
+                <div className="homeBar">
+                    <span className="siteHeadSmall"> - HAIA entry - </span>
+                </div>
+                <div className="navCont">
+                {/*Navbar component, not including search-bar.*/}
+                <Navbar />
+                <div className="horzLine"/>
+                <div className="spacer"/>
+                </div>
+          </div>
+          <div className="horzLine"/>
+        <div className="indvContent" id="ENTRYCONTENT">
+          <div class="entryLeft">
+          <h4 id="ENTRYTITLE">{entry.title}</h4>
+          <img src={entry.url} id="ENTRYIMG"></img>
+          </div>
+          <div class="entryRight">
+            <h4 id="ENTRYTITLE">{entry.src}</h4>
+            <p id="ENTRYTITLE">{entry.hid}</p>
+          </div>
+        </div>
       </div>
     );
   }
