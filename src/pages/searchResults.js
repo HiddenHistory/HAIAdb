@@ -226,6 +226,7 @@ const SearchResults = () => {
                 </div>
     </div>
     <div id="DEFAULTMAIN">
+      <div class="resultWrap">
       <div className="results">
           {  forThisPage.map((entry, keyval) => (
             <Link to={'/entry/'+ entry.hid}
@@ -252,6 +253,7 @@ const SearchResults = () => {
               </Link>
             ))
           }
+        </div>
         </div>
       <div id="NUMRESULTS">number of results: {forThisPage.length}</div>
       </div>

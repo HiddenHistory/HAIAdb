@@ -10,6 +10,8 @@ import AdvSearch from './pages/advancedSearch';
 import EntryMod from './pages/entryMod';
 import haiastyles from "./style/haiastyles.css"
 
+
+
 import { Routes, Route, Link} from "react-router-dom";
 
 //The actual contents of the webpage are contained in the app.js file, within this function. The contents of this function are returned to the index.html file.
