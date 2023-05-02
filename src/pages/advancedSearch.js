@@ -118,7 +118,7 @@ const AdvancedSearch = () => {
             </Link>
             </div>
         </form>
-        <div className="featured Image">
+        <div className="featuredImage">
             <img src="https://drive.google.com/uc?id=1ysqtSrWlQZbauhH5jPPjZO0Wp-U5I5Uy"/>
         </div>
       </div>
